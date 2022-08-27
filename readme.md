@@ -1,46 +1,56 @@
-# Gitlab CLI Extension
-Merging and rebasing PRs is just a click away.
+# Gitlab CLI 
+Merge PR's and Cherry-pick mutliple merge commits using CLI in one click from your browser.
 
-![Screenshot](/screenshot.jpg)
+## Gitlab-cli-extension
 
-## Setting up the extension - server
-1. `yarn build`
-2. `cd dist/server`
-3. `vi config.json`
+### To build extension
+1. `cd extension`
+2. `npm install`
+3. `yarn build`
 
-```json
-{
-  "repos": [
-    {
-      "url": <home-page-url-of-the-gitlab-repo>,
-      "path": <absolute-path-of-the-repo-on-your-system>
-    }
-  ]
-}
-```
-
-4. `yarn start`
-
-## Setting up the extension - client
+### Setting up the extension - client
 1. go to `chrome://extensions`
 2. turn on the `developer mode` toggle
 3. `Load unpacked`
 4. select `dist/extension`
 
-### example of `config.json`
-```json
-{
-  "repos": [
-    {
-      "url": "https://gitlab.com/gitlab-org/gitlab-foss",
-      "path": "/Users/chicho17/repos/gitlab-foss"
-    },
-    {
-      "url": "https://gitlab.com/inkscape/inkscape",
-      "path": "/Users/chicho17/repos/inkscape"
-    }
-  ]
-}
-```
+## Gitlab-cli-app
+Build mac OS app with packaged gitlab cli server files
 
-### It's highly recommended that you DO NOT use your existing local repo but instead clone afresh at a different path and use that path in your `config.json`.
+### To build a new app
+1. `cd server`
+2. `npm install`
+3. `npm run make`
+
+#### Location of packaged app: `out/<app-name>-darwin-x64`
+
+### Adding Profiles
+- Visit gitlab.com
+- Open Profile page from popup
+- Add `Homepage url of the gitLab repo` as URL and `absolute path of the local repo` as path in profile page
+
+### Using Cherrypick
+- Visit any page inside your repository
+- Open Cherry-pick page from popup
+- Add `Source branch` in which commits will be added
+- Add `Target branch` in which Merge request will be created to merge the source branch
+- Add `Author`, `Commit Time` and submit
+- After the commits are fetched click on cherry-pick
+
+### Using Cherrypick Continue/Stop
+- In case of conflict, automatic cherry-pick pauses
+- Click `Stop` to stop cherry-pick
+- Resolve the conflict by copy pasting the command in description box
+- After manually resolving the conflict, click `Continue` to proceed
+
+#### It's highly recommended that you DO NOT use your existing local repo but instead clone afresh at a different path and use that path in your `Profile Page`.
+
+##### Problem it solve?
+- Pipeline failure due to unrelated issues prevents developers to merge branches.
+- Cherry-picking multiple related merge commits has to be done manually.
+
+#### Features
+- Merge via CLI with just a click
+- Find merge commits and cherry-pick them automatically
+- Pause and continue cherry-pick process in case of conflict
+- Add or Modify profiles right from your browser

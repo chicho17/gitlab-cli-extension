@@ -2,36 +2,37 @@ const esbuild = require("esbuild");
 
 Promise.all([
   esbuild.build({
-    entryPoints: ["src/extension/content.ts"],
+    entryPoints: ["src/content.ts"],
     bundle: true,
     outfile: "dist/extension/content.js",
   }),
   esbuild.build({
-    entryPoints: ["src/server/api.js"],
+    entryPoints: ["src/cherryPickForm.ts"],
     bundle: true,
-    outfile: "dist/server/api.js",
-    platform: "node",
+    outfile: "dist/extension/assets/cherryPickForm.js",
   }),
+  esbuild.build({
+    entryPoints: ["src/popup.ts"],
+    bundle: true,
+    outfile: "dist/extension/assets/popup.js",
+  }),
+  esbuild.build({
+    entryPoints: ["src/profileScript.ts"],
+    bundle: true,
+    outfile: "dist/extension/assets/profileScript.js",
+  })
 ])
   .then(() => {
     const fs = require("fs");
-    const filesToCopy = fs.readdirSync("src/extension/public");
+    const filesToCopy = fs.readdirSync("./public");
     return Promise.all([
       ...filesToCopy.map((file) => {
         return new Promise((resolve) =>
           fs.copyFile(
-            `src/extension/public/${file}`,
+            `./public/${file}`,
             `dist/extension/${file}`,
             resolve
           )
-        );
-      }),
-      new Promise((res) => {
-        const fs = require("fs");
-        fs.copyFile(
-          "./src/server/package.json",
-          "./dist/server/package.json",
-          res
         );
       }),
     ]);

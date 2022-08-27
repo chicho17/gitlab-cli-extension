@@ -1,0 +1,81 @@
+label {
+  display: block;
+  font-size: 18px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin-bottom: 5px;
+}
+input {
+  width: 95%;
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid rgb(0, 35, 190);
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+form {
+  margin: auto;
+  width: 85%;
+  max-height: 200px;
+  overflow-y: scroll;
+  border: 1px solid #e5e5e5;
+  margin-top: 30px;
+  padding: 15px;
+}
+h2 {
+  margin: 0px;
+  padding: 2px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.app-header {
+  background-color: rgb(41, 41, 97);
+  text-align: center;
+  color: white;
+}
+#cherry-pick-desc,
+#options-desc {
+  display: none;
+  margin: auto;
+  width: 85%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #e5e5e5;
+  background-color: #fafafa;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+#console-box {
+  margin: auto;
+  width: 100%;
+  height: 200px;
+  overflow: scroll;
+  overflow-y: scroll;
+  word-break: break-all;
+  padding: 8px;
+  border: 1px solid #e5e5e5;
+  color: white;
+  font-family: monospace;
+  background-color: #000000;
+  border-radius: 7px;
+  box-sizing: border-box;
+  font-size: 15px;
+  position: fixed;
+  bottom: 0;
+}
+.copy-button {
+  border: none;
+  padding: 0;
+  background: none;
+}
+#console-expand {
+  padding: "2px";
+  overflow: scroll;
+  padding-left: "4px";
+  padding-right: "4px";
+  border: 1px solid rgb(0, 225, 255);
+  background: black;
+  float: right;
+  color: rgb(0, 225, 255);
+}

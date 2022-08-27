@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="assets/cherryPickForm.js" defer></script>
+  </head>
+  <body>
+    <div class="app-header">
+      <h2>GitLab CLI Extension</h2>
+    </div>
+    <form class="cherry-pick-form">
+      <div class="form-group row">
+        <div class="form-group col-md-6">
+          <label for="location"  class="required-input">Repository URL:</label>
+          <input
+            type="text"
+            class="form-control"
+            autocomplete="off"
+            id="location"
+            name="location"
+            list="url-list"
+            placeholder="select repo url present in config file"
+            required
+          />
+          <datalist id="url-list"></datalist>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="fetchMergeCommitBranch"  class="required-input">Fetch Merge Commits From:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="fetchMergeCommitBranch"
+            name="fetchMergeCommitBranch"
+            placeholder="branch to get merge commits from"
+            value="main"
+            required
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="form-group col-md-6">
+          <label for="commitBranch"  class="required-input">Source Branch</label>
+          <input
+            type="text"
+            class="form-control"
+            id="commitBranch"
+            name="commitBranch"
+            placeholder="new branch or existing branch in origin"
+            required
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="targetBranch"  class="required-input">Target Branch</label>
+          <input
+            type="text"
+            class="form-control"
+            id="targetBranch"
+            name="targetBranch"
+            placeholder="target branch"
+            required
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="form-group col-md-6">
+          <label for="commitAuthor"  class="required-input">Authors</label>
+          <div id="author-list"></div>
+          <input
+            type="text"
+            class="form-control"
+            id="commitAuthor"
+            name="commitAuthor"
+            placeholder="Type email id's of authors and press Enter to add"
+          />
+          <div id="author-empty-message">Commit Author cannot be empty</div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="commitTime"  class="required-input">Time since commit:</label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            id="commitTime"
+            name="commitTime"
+            required
+          />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div id="cherry-pick-desc"></div>
+  </body>
+</html>

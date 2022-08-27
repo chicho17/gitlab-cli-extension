@@ -1,3 +1,5 @@
+import { ajaxClient } from "./ajaxClient";
+
 function streamBody(body, onChunkReceive) {
   const decoder = new TextDecoder("utf-8");
 
@@ -19,9 +21,9 @@ function streamBody(body, onChunkReceive) {
             // Enqueue the next data chunk into our target stream
             controller.enqueue(value);
             const chunkString = decoder.decode(value, { stream: true });
-            if (chunkString === "ERROR") {
+            if (chunkString.toLowerCase().startsWith("error")) {
+              onChunkReceive(chunkString);
               throw Error(chunkString);
-              return;
             }
             onChunkReceive(chunkString);
           }
@@ -36,8 +38,22 @@ function streamBody(body, onChunkReceive) {
     .then((response) => response.text());
 }
 
-function fetchStream(url, onChunkReceive) {
-  return fetch(url)
+function fetchBuilder(path, method, payload) {
+  if (method === "GET") {
+    return ajaxClient.GET({
+      path,
+      requestType: "CLIRequest",
+    });
+  } else if (method === "POST") {
+    return ajaxClient.POST({
+      path,
+      jsonInputBody: payload,
+    });
+  }
+}
+
+function fetchStream(path, method, payload, onChunkReceive) {
+  return fetchBuilder(path, method, payload)
     .then((r) => {
       if (r.status >= 400) {
         return r.text().then((text) => {
@@ -45,6 +61,10 @@ function fetchStream(url, onChunkReceive) {
         });
       }
       return r.body;
+    })
+    .catch((e) => {
+      onChunkReceive(e.toString());
+      throw e;
     })
     .then((body) => streamBody(body, onChunkReceive));
 }

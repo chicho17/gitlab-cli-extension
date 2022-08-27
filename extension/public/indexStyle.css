@@ -1,0 +1,14 @@
+body {
+    min-width: 280px;
+  }
+  .app-header {
+    padding: 5px;
+    background-color: rgb(41, 41, 97);
+    text-align: center;
+    color: white;
+    margin-bottom: 10px;
+  }
+  button {
+    width: fit-content;
+    margin: 0px 20px 10px 20px;
+  }
