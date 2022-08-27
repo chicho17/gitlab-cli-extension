@@ -6,3 +6,4 @@ Icon?
 package-lock.json
 out/
 yarn.lock
+dist.zip
